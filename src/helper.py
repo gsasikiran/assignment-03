@@ -18,17 +18,28 @@ def maze_map_to_tree(maze_map):
 
     Parameters
     ----------
-    maze_map : [type]
-        [description]
+    maze_map : list
+        The list of the text
 
     Returns
     -------
-    [type]
-        [description]
+    dict_tree :dictionary
+        The keys of the dictionary are a tuple (row,col) representing the parent node.
+        The values are the list of tuples (row,col) representing the corresponding children nodes.
+        The list starts with the left node and ends at down node travelling clockwise
     """
+    dict_tree = {}
+    for row in range(0, len(maze_map)):
+        for col in range(0, len(maze_map[row])):
 
+            if maze_map[row][col] == ' ' or 's':
+                left = (row, col - 1)
+                right = (row, col + 1)
+                up = (row - 1, col)
+                down = (row + 1, col)
+                dict_tree.update({(row, col): [left, up, right, down]})
 
-    raise NotImplementedError
+    return dict_tree
 
 
 def assign_character_for_nodes(maze_map, current_node, prev_node):
@@ -51,6 +62,7 @@ def assign_character_for_nodes(maze_map, current_node, prev_node):
     """
 
 
+
     raise NotImplementedError
 
 
@@ -71,3 +83,16 @@ def write_to_file(file_name, path):
     """
 
     raise NotImplementedError
+
+def start_pose(maze_map):
+    '''
+
+    :param maze_map: list
+            The list of the text
+    :return: tuple
+            The tuple (row,col) where the source is present
+    '''
+    for row in range(0,len(maze_map)):
+        for col in range(0, len(maze_map[row])):
+            if maze_map[row][col] == 's':
+                 return (row,col)

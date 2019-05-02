@@ -8,10 +8,10 @@ Created on Fri Apr 27 21:15:04 2018
 import sys
 import os
 from collections import deque
-from helper import maze_map_to_tree, write_to_file, assign_character_for_nodes
+from helper import maze_map_to_tree, write_to_file, assign_character_for_nodes, start_pose
 
 
-def breadth_first_search(maze_map, start_pos, goal_pos):
+def breadth_first_search(maze_map):
     """Function to implement the BFS algorithm.
     Please use the functions in helper.py to complete the algorithm.
     Please do not clutter the code this file by adding extra functions.
@@ -33,11 +33,14 @@ def breadth_first_search(maze_map, start_pos, goal_pos):
     """
 
 
-    start = start_pos[0]
+    start = start_pose(maze_map)
+    print(start)
     goal = goal_pos
     queue = deque([("", start)])
 
     # Fill in your BFS algorithm here
+    print(goal)
+
 
     return
 
@@ -59,6 +62,7 @@ if __name__ == '__main__':
     with open(file_path_map1) as f1:
         maze_map_map1 = f1.readlines()
 
+
     maze_map_map2 = []
     with open(file_path_map2) as f2:
         maze_map_map2 = f2.readlines()
@@ -66,6 +70,9 @@ if __name__ == '__main__':
     maze_map_map3 = []
     with open(file_path_map3) as f3:
         maze_map_map3 = f3.readlines()
+
+    breadth_first_search(maze_map_map1)
+
 
     # CALL THIS FUNCTIONS after filling in the necessary implementations
     # path_map1 = breadth_first_search(maze_map_map1, start_pos_map1, goal_pos_map1)
