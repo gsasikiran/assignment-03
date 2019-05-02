@@ -8,7 +8,8 @@ Created on Fri Apr 27 21:15:04 2018
 import sys
 import os
 from collections import deque
-from helper import maze_map_to_tree, write_to_file, assign_character_for_nodes, start_pose
+from helper import maze_map_to_tree, write_to_file, assign_character_for_nodes
+from helper import start_pose, print_maze
 
 
 def breadth_first_search(maze_map):
@@ -35,14 +36,21 @@ def breadth_first_search(maze_map):
 
     start = start_pose(maze_map)
     print(start)
-    goal = goal_pos
-    queue = deque([("", start)])
+    iterable = maze_map_to_tree(maze_map)
+
+    # queue = deque([(iterable, start)])
 
     # Fill in your BFS algorithm here
-    print(goal)
+    frontier = []
+    visited = []
 
-
-    return
+    frontier.extend(iterable[start])
+    for i in  range(0, 4):
+        cur_node = frontier.pop(0)
+        visited.extend(cur_node)
+        print(cur_node)
+        new_map = assign_character_for_nodes(maze_map, cur_node, start)
+        print_maze(new_map)
 
 
 if __name__ == '__main__':
@@ -71,7 +79,7 @@ if __name__ == '__main__':
     with open(file_path_map3) as f3:
         maze_map_map3 = f3.readlines()
 
-    breadth_first_search(maze_map_map1)
+    breadth_first_search(maze_map_map2)
 
 
     # CALL THIS FUNCTIONS after filling in the necessary implementations
