@@ -67,6 +67,9 @@ if __name__ == '__main__':
     with open(file_path_map3) as f3:
         maze_map_map3 = f3.readlines()
 
+
+
+
     # CALL THIS FUNCTIONS after filling in the necessary implementations
     # path_map1 = depth_first_search(maze_map_map1, start_pos_map1, goal_pos_map1)
     # write_to_file("dfs_map1", path_map1)

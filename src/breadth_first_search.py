@@ -9,7 +9,8 @@ import sys
 import os
 from collections import deque
 from helper import maze_map_to_tree, write_to_file, assign_character_for_nodes
-from helper import start_pose, print_maze
+from helper import start_pose, print_maze, clear_screen
+import time
 
 
 def breadth_first_search(maze_map):
@@ -35,22 +36,30 @@ def breadth_first_search(maze_map):
 
 
     start = start_pose(maze_map)
-    print(start)
     iterable = maze_map_to_tree(maze_map)
 
     # queue = deque([(iterable, start)])
 
     # Fill in your BFS algorithm here
-    frontier = []
+    frontier = [start]
     visited = []
 
     frontier.extend(iterable[start])
-    for i in  range(0, 4):
+
+    while len(frontier)!=0:
+        # print(frontier)
         cur_node = frontier.pop(0)
-        visited.extend(cur_node)
-        print(cur_node)
-        new_map = assign_character_for_nodes(maze_map, cur_node, start)
-        print_maze(new_map)
+        # print(frontier)
+        for point in iterable[cur_node]:
+            if point not in visited and maze_map[cur_node[0]][cur_node[1]] != '=' and maze_map[cur_node[0]][cur_node[1]]!= '|':
+                new_map = assign_character_for_nodes(maze_map, point, cur_node)
+                print_maze(new_map)
+                frontier.append(point)
+                visited.append(point)
+    return new_map
+
+
+
 
 
 if __name__ == '__main__':
@@ -79,15 +88,15 @@ if __name__ == '__main__':
     with open(file_path_map3) as f3:
         maze_map_map3 = f3.readlines()
 
-    breadth_first_search(maze_map_map2)
+    # breadth_first_search(maze_map_map2)
 
 
     # CALL THIS FUNCTIONS after filling in the necessary implementations
-    # path_map1 = breadth_first_search(maze_map_map1, start_pos_map1, goal_pos_map1)
+    # path_map1 = breadth_first_search(maze_map_map1)
     # write_to_file("bdf_map1", path_map1)
 
-    # path_map2 = breadth_first_search(maze_map_map2, start_pos_map2, goal_pos_map2)
+    # path_map2 = breadth_first_search(maze_map_map2)
     # write_to_file("bdf_map2", path_map2)
 
-    # path_map3 = breadth_first_search(maze_map_map3, start_pos_map3, goal_pos_map3)
+    # path_map3 = breadth_first_search(maze_map_map3)
     # write_to_file("bdf_map3", path_map3)

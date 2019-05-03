@@ -6,7 +6,7 @@ Created on Thu May  3 01:36:01 2018
 @author: Iswariya Manivannan
 """
 
-
+import os, sys
 def maze_map_to_tree(maze_map):
     """Function to create a tree from the map file. The idea is
     to check for the possible movements from each position on the
@@ -36,6 +36,9 @@ def maze_map_to_tree(maze_map):
                 up = (row - 1, col)
                 down = (row + 1, col)
                 dict_tree.update({(row, col): [left, up, right, down]})
+
+
+
 
     return dict_tree
 
@@ -103,7 +106,10 @@ def write_to_file(file_name, path):
 
     """
 
-    raise NotImplementedError
+    with open(file_name, 'w') as f:
+        for item in path:
+            f.write("%s" % item)
+
 
 
 def start_pose(maze_map):
@@ -128,3 +134,6 @@ def print_maze(maze_map):
     '''
     for row in maze_map:
         print(row, end='')
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
