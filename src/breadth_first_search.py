@@ -41,21 +41,21 @@ def breadth_first_search(maze_map):
     # queue = deque([(iterable, start)])
 
     # Fill in your BFS algorithm here
-    frontier = [start]
+    fringe = [start]
     visited = []
 
-    frontier.extend(iterable[start])
+    fringe.extend(iterable[start])
 
-    while len(frontier)!=0:
-        # print(frontier)
-        cur_node = frontier.pop(0)
-        # print(frontier)
-        for point in iterable[cur_node]:
-            if point not in visited and maze_map[cur_node[0]][cur_node[1]] != '=' and maze_map[cur_node[0]][cur_node[1]]!= '|':
-                new_map = assign_character_for_nodes(maze_map, point, cur_node)
+    while fringe:
+        # print(fringe)
+        parent_node = fringe.pop(0)
+        # print(fringe)
+        for child_node in iterable[parent_node]:
+            if child_node not in visited and maze_map[parent_node[0]][parent_node[1]] != '=' and maze_map[parent_node[0]][parent_node[1]]!= '|':
+                new_map = assign_character_for_nodes(maze_map, child_node, parent_node)
                 print_maze(new_map)
-                frontier.append(point)
-                visited.append(point)
+                fringe.append(child_node)
+                visited.append(child_node)
     return new_map
 
 
@@ -88,7 +88,7 @@ if __name__ == '__main__':
     with open(file_path_map3) as f3:
         maze_map_map3 = f3.readlines()
 
-    # breadth_first_search(maze_map_map2)
+    breadth_first_search(maze_map_map2)
 
 
     # CALL THIS FUNCTIONS after filling in the necessary implementations
